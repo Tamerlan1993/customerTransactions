@@ -9,7 +9,7 @@ export const ROUTES = {
     },
 }
 
-export const dateFormat = "MM/DD/YYYY"
+export const dateFormat = "DD/MM/YYYY"
 
 export const DEFAULT_COUNT_OPTIONS = [10, 20, 50];
 

@@ -1,7 +1,8 @@
 import FormField from '@/components/form/FormField';
 import TableFilter from '@/components/table/TableFilter';
-import { transactionKeys } from '@/constants';
+import { dateFormat, transactionKeys } from '@/constants';
 import useQueryParams from '@/hooks/useQueryParams';
+import dayjs from 'dayjs';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -35,7 +36,13 @@ const TransactionFilters = () => {
   });
 
   const onSubmit = (values: ITransactionFilters) => {
-    setParams({ ...values, page: '1' });
+    setParams({
+      ...values,
+      page: '1',
+      TransactionDate: dayjs(values?.TransactionDate)
+        .format(dateFormat)
+        .toString(),
+    });
   };
 
   useEffect(() => {
@@ -48,6 +55,7 @@ const TransactionFilters = () => {
       isValid={isValid}>
       <FormField
         control={control}
+        label='Transaction ID'
         name='TransactionID'
         inputProps={{
           placeholder: transactionKeys.TransactionID.label,
@@ -55,6 +63,7 @@ const TransactionFilters = () => {
       />
       <FormField
         control={control}
+        label='Customer ID'
         name='CustomerID'
         inputProps={{
           placeholder: transactionKeys.CustomerID.label,
@@ -62,6 +71,7 @@ const TransactionFilters = () => {
       />
       <FormField
         control={control}
+        label='Transaction Amount'
         name='TransactionAmount'
         inputProps={{
           placeholder: transactionKeys.TransactionAmount.label,
@@ -69,9 +79,10 @@ const TransactionFilters = () => {
       />
       <FormField
         control={control}
+        label='Transaction Date'
         name='TransactionDate'
         inputProps={{
-          placeholder: transactionKeys.TransactionDate.label,
+          type: 'date',
         }}
       />
     </TableFilter>

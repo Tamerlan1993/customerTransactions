@@ -12,6 +12,7 @@ function getDefaultValues(searchParams: Record<string, string>) {
     Name: searchParams?.Name ?? '',
     Surname: searchParams?.Surname ?? '',
     GSMNumber: searchParams?.GSMNumber ?? '',
+    BirthDate: searchParams?.BirthDate ?? '',
   };
 }
 
@@ -69,6 +70,14 @@ const CustomerFilters = () => {
             setValue('GSMNumber', `+${value}`);
             trigger('GSMNumber');
           }
+        }}
+      />
+      <FormField
+        control={control}
+        name='BirthDate'
+        label='BirthDate'
+        inputProps={{
+          type: 'date',
         }}
       />
     </TableFilter>

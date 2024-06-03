@@ -47,10 +47,18 @@ const Customers = () => {
     if (Object.keys(params).length) {
       Object.keys(params).forEach((key) => {
         if (['page', 'size'].includes(key)) return;
-        result = result?.filter(
-          (customer) =>
-            customer?.[key as keyof typeof customer] === params?.[key]
-        );
+        if (key === customerKeys.BirthDate.key) {
+          result = result?.filter(
+            (customer) =>
+              dayjs(customer?.BirthDate).format(dateFormat) ===
+              dayjs(params?.['BirthDate']).format(dateFormat)
+          );
+        } else {
+          result = result?.filter(
+            (customer) =>
+              customer?.[key as keyof typeof customer] === params?.[key]
+          );
+        }
       });
     }
     return result;

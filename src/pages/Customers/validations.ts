@@ -18,6 +18,7 @@ export const customerFilterSchema = yup.object({
     CustomerID: yup.string().nullable(),
     Name: yup.string().nullable(),
     Surname: yup.string().nullable(),
+    BirthDate: yup.string().nullable(),
     GSMNumber: yup.string().nullable()
         .notRequired().matches(phoneRegExp, {
             excludeEmptyString: true,

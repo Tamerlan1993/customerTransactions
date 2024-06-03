@@ -1,9 +1,15 @@
 import Pagination from '@/components/pagination';
 import Table from '@/components/table';
 import TableFilterBadges from '@/components/table/TableFilterBadges';
-import { DEFAULT_COUNT_OPTIONS, ROUTES, transactionKeys } from '@/constants';
+import {
+  DEFAULT_COUNT_OPTIONS,
+  ROUTES,
+  dateFormat,
+  transactionKeys,
+} from '@/constants';
 import useQueryParams from '@/hooks/useQueryParams';
 import { useTransactions } from '@/stores/transactions';
+import dayjs from 'dayjs';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import TransactionFilters from './Filters';
@@ -25,10 +31,18 @@ const Transactions = () => {
     if (Object.keys(params).length) {
       Object.keys(params).forEach((key) => {
         if (['page', 'size'].includes(key)) return;
-        result = result?.filter(
-          (customer) =>
-            customer?.[key as keyof typeof customer] === params?.[key]
-        );
+        if (key === transactionKeys.TransactionDate.key) {
+          result = result?.filter(
+            (transaction) =>
+              dayjs(transaction?.TransactionDate).format(dateFormat) ===
+              dayjs(params?.['TransactionDate']).format(dateFormat)
+          );
+        } else {
+          result = result?.filter(
+            (transaction) =>
+              transaction?.[key as keyof typeof transaction] === params?.[key]
+          );
+        }
       });
     }
     return result;
