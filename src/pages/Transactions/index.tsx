@@ -75,16 +75,6 @@ const Transactions = () => {
                 </Link>
               ),
             },
-            actions: [
-              {
-                label: 'View Customer Details',
-                onClick: () => {},
-              },
-              {
-                label: 'View Transactions',
-                onClick: () => {},
-              },
-            ],
           };
         })}
       />
