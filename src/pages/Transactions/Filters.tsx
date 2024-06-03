@@ -1,8 +1,7 @@
 import FormField from '@/components/form/FormField';
 import TableFilter from '@/components/table/TableFilter';
-import { dateFormat, transactionKeys } from '@/constants';
+import { transactionKeys } from '@/constants';
 import useQueryParams from '@/hooks/useQueryParams';
-import dayjs from 'dayjs';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -39,9 +38,6 @@ const TransactionFilters = () => {
     setParams({
       ...values,
       page: '1',
-      TransactionDate: dayjs(values?.TransactionDate)
-        .format(dateFormat)
-        .toString(),
     });
   };
 
